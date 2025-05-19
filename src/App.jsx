@@ -1,13 +1,24 @@
 import React from "react";
-import Navbar from "./components/navbar/navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const App = () => {
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Gallery from "./pages/Gallery";
+import Navbar from "./components/navbar/Navbar";
+
+function App() {
   return (
-    <div className="max-w-5xl m-auto ">
+    <Router>
       <Navbar />
-      <div>Home</div>
-    </div>
+      <div className="p-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;

@@ -1,22 +1,38 @@
-import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const navbar = () => {
+const Navbar = () => {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   return (
     <div className="flex flex-1 text-center items-center h-16">
       <ul className="flex justify-around w-full">
-        <li className="w-28 px-4 py-2 rounded-3xl bg-sky-500 hover:bg-sky-700 hover:cursor-pointer text-white">
-          <a href="#">Home</a>
+        <li
+          className={`w-28 px-4 py-2 rounded-3xl text-white cursor-pointer
+          ${isActive("/") ? "bg-sky-700" : "bg-sky-500 hover:bg-sky-700"}`}
+        >
+          <Link to="/">Home</Link>
         </li>
-
-        <li className="w-28 px-4 py-2 rounded-3xl bg-sky-500 hover:bg-sky-700 text-white hover:cursor-pointer">
-          <a href="#">Contact</a>
+        <li
+          className={`w-28 px-4 py-2 rounded-3xl text-white cursor-pointer
+          ${
+            isActive("/contact") ? "bg-sky-700" : "bg-sky-500 hover:bg-sky-700"
+          }`}
+        >
+          <Link to="/contact">Contact</Link>
         </li>
-        <li className="w-28 px-4 py-2 rounded-3xl bg-sky-500 hover:bg-sky-700 text-white hover:cursor-pointer">
-          <a href="#">Properties</a>
+        <li
+          className={`w-28 px-4 py-2 rounded-3xl text-white cursor-pointer
+          ${
+            isActive("/gallery") ? "bg-sky-700" : "bg-sky-500 hover:bg-sky-700"
+          }`}
+        >
+          <Link to="/gallery">Gallery</Link>
         </li>
       </ul>
     </div>
   );
 };
 
-export default navbar;
+export default Navbar;
