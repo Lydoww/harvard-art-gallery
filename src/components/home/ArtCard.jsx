@@ -22,16 +22,19 @@ const ArtCard = ({ art }) => {
           rounded-b-2xl
           flex flex-col
           h-full
-          bg-gray-700 bg-opacity-50
+          bg-gray-700
         "
       >
         <h2 className="text-xl font-bold text-center">{art.title[0]}</h2>
-        <div className="flex-grow flex flex-col justify-center">
+        <div className="flex-grow flex flex-col justify-center relative">
           <p>
-            <span className="font-semibold text-blue-500">Exposed at: </span>
+            <span className="font-semibold text-blue-500 ">Information provided by: </span>
             {art.dataProvider}
           </p>
-          <p className="text-sm">From: {art.country}</p>
+
+          <p className="text-sm font-semibold absolute bottom-0 left-0">
+            From: {art.country}
+          </p>
         </div>
       </div>
     </div>

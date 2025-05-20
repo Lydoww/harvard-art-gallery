@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchEuropeanaData } from "../services/europeanaService";
+import { fetchHarvardArtworks } from "../services/europeanaService";
 import ArtList from "../components/home/ArtList";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await fetchEuropeanaData();
+        const result = await fetchHarvardArtworks();
         setArts(result.items);
         console.log(result);
       } catch (error) {
@@ -21,7 +21,10 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="flex justify-center mb-4">Main art</h1>
+      <h1 className="flex justify-center mb-4 text-2xl font-semibold">
+        Welcome to Europenea Art Gallery, surf around to find your favorite
+        pieces
+      </h1>
       <ArtList arts={arts} />
     </div>
   );

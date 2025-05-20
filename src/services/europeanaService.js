@@ -1,42 +1,18 @@
 import apiClient from "../api/apiClient";
 
-const getRandomKeyWord = () => {
-  const keywords = [
-    "art",
-    "nature",
-    "history",
-    "science",
-    "technology",
-    "culture",
-    "architecture",
-    "photography",
-    "music",
-    "literature",
-  ];
-  return keywords[Math.floor(Math.random() * keywords.length)];
-};
-
-export const fetchEuropeanaData = async (
-  query = "art",
-  language = "en",
-  rows = 50
-) => {
+export const fetchHarvardArtworks = async (page = 1, size = 30) => {
   try {
-    const response = await apiClient.get("", {
+    const response = await apiClient.get("object", {
       params: {
-        wskey: import.meta.env.VITE_API_KEY,
-        query,
-        qf: `TYPE:IMAGE`,
-        thumbnail: true,
-        media: true,
-        profile: "rich",
-        rows,
-        language,
+        apikey: import.meta.env.VITE_API_KEY,
+        page,
+        size,
+        hasimage: 1, // Pour s'assurer qu'on a bien une image à afficher
       },
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching Europeana data:", error);
+    console.error("Error fetching Harvard artworks:", error);
     throw error;
   }
 };
