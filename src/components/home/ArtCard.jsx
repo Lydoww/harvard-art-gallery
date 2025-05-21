@@ -1,43 +1,58 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const ArtCard = ({ art }) => {
+  console.log(art);
   return (
-    <div className="relative group w-full rounded-2xl overflow-hidden cursor-pointer">
-      {/* Image toujours visible */}
-      <img
-        src={art.edmPreview[0]}
-        alt={`Image of ${art.title[0]}`}
-        className="w-full h-52 object-cover rounded-2xl transition-filter duration-300 delay-100 group-hover:blur-sm"
-      />
+    <Link to={`/arts/${art.id}`}>
+      <div className="relative group w-full rounded-2xl overflow-hidden cursor-pointer">
+        {/* Image visible par défaut */}
+        <img
+          src={art.primaryimageurl}
+          alt={`Image of ${art.title}`}
+          className="w-full h-52 object-cover rounded-2xl transition-filter duration-300 delay-100 group-hover:blur-sm"
+        />
 
-      {/* Overlay texte caché par défaut */}
-      <div
-        className="
+        {/* Overlay texte visible au hover */}
+        <div
+          className="
           absolute inset-0
           p-4
           opacity-0
           transition-opacity duration-300
-          group-hover:opacity-80
+          group-hover:opacity-90
           text-white
-          rounded-b-2xl
+          rounded-2xl
           flex flex-col
-          h-full
-          bg-gray-700
+          bg-gray-900/90
+          overflow-y-auto
         "
-      >
-        <h2 className="text-xl font-bold text-center">{art.title[0]}</h2>
-        <div className="flex-grow flex flex-col justify-center relative">
-          <p>
-            <span className="font-semibold text-blue-500 ">Information provided by: </span>
-            {art.dataProvider}
+        >
+          <h2 className="text-lg font-bold text-center mb-2 break-words">
+            {art.title || "Untitled"}
+          </h2>
+
+          <p className="text-sm mb-1 break-words">
+            <span className="font-semibold text-blue-400">Artist:</span>{" "}
+            {art.people?.map((person) => person.name).join(", ") || "Unknown"}
           </p>
 
-          <p className="text-sm font-semibold absolute bottom-0 left-0">
-            From: {art.country}
+          <p className="text-sm mb-1 break-words">
+            <span className="font-semibold text-blue-400">Type:</span>{" "}
+            {art.worktypes?.[0]?.worktype || "Unknown"}
+          </p>
+
+          <p className="text-sm mb-1 break-words">
+            <span className="font-semibold text-blue-400">Culture:</span>{" "}
+            {art.culture || "Unknown"}
+          </p>
+
+          <p className="text-sm mt-auto break-words">
+            <span className="font-semibold text-blue-400">Date:</span>{" "}
+            {art.dated || "Unknown"}
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
