@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ImageModal from "../ui/ImageModal";
 
-const ArtDetail = ({ art }) => {
+const ArtDetail = ({ art, openModal, closeModal, showModal }) => {
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showModal]);
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       {/* Image */}
+
       {art.primaryimageurl && (
         <img
           src={art.primaryimageurl}
           alt={art.title || "Artwork image"}
-          className="w-full h-auto rounded-lg mb-6 object-contain"
+          onClick={openModal}
+          className="w-full h-auto rounded-lg mb-6 object-contain cursor-pointer"
         />
       )}
+      <ImageModal show={showModal} onClose={closeModal}>
+        <img
+          src={art.primaryimageurl}
+          alt={art.title || "Artwork image"}
+          className="w-full h-auto rounded"
+        />
+      </ImageModal>
 
       {/* Titre */}
       <h1 className="text-3xl font-bold mb-4">{art.title || "Untitled"}</h1>

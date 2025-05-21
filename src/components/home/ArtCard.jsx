@@ -9,7 +9,7 @@ const ArtCard = ({ art }) => {
         <img
           src={art.primaryimageurl}
           alt={`Image of ${art.title}`}
-          className="w-full h-52 object-cover rounded-2xl transition-filter duration-300 delay-100 group-hover:blur-sm"
+          className=" w-full h-52 object-cover rounded-2xl transition-filter duration-300 delay-100 group-hover:blur-sm"
         />
 
         {/* Overlay texte visible au hover */}
@@ -27,7 +27,7 @@ const ArtCard = ({ art }) => {
           overflow-y-auto
         "
         >
-          <h2 className="text-lg font-bold text-center mb-2 break-words">
+          <h2 className="text-lg font-bold text-center mb-6 break-words">
             {art.title || "Untitled"}
           </h2>
 
@@ -46,7 +46,7 @@ const ArtCard = ({ art }) => {
             {art.culture || "Unknown"}
           </p>
 
-          <p className="text-sm mt-auto break-words">
+          <p className="text-sm break-words absolute bottom-3 right-4">
             <span className="font-semibold text-blue-400">Date:</span>{" "}
             {art.dated || "Unknown"}
           </p>

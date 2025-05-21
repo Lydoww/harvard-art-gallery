@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="pt-24 px-4">
+      <div className="pt-24 px-4 mb-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />

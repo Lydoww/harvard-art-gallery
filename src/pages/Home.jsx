@@ -30,8 +30,7 @@ const Home = () => {
       ) : (
         <>
           <h1 className="flex justify-center mb-4 text-2xl font-semibold">
-            Welcome to Europenea Art Gallery, surf around to find your favorite
-            pieces
+            Welcome to Europenea Art Gallery, surf around to find your favorite workart
           </h1>
           <ArtList arts={arts} />
         </>

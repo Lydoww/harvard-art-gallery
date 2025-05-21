@@ -6,7 +6,16 @@ import ArtDetail from "../components/home/ArtDetail";
 const ArtDetailPage = () => {
   const [art, setArt] = useState({});
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +38,12 @@ const ArtDetailPage = () => {
         <p>Loading data...</p>
       ) : (
         <>
-          <ArtDetail art={art} />
+          <ArtDetail
+            art={art}
+            showModal={showModal}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
         </>
       )}
     </div>
