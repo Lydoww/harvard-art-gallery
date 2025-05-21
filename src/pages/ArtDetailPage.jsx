@@ -9,12 +9,8 @@ const ArtDetailPage = () => {
   const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
+  const toggleModal = () => {
+    setShowModal((prev) => !prev);
   };
 
   useEffect(() => {
@@ -41,8 +37,7 @@ const ArtDetailPage = () => {
           <ArtDetail
             art={art}
             showModal={showModal}
-            openModal={openModal}
-            closeModal={closeModal}
+            toggleModal={toggleModal}
           />
         </>
       )}

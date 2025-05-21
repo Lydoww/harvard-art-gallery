@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ImageModal from "../ui/ImageModal";
 
-const ArtDetail = ({ art, openModal, closeModal, showModal }) => {
+const ArtDetail = ({ art, toggleModal, showModal }) => {
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
@@ -21,11 +21,11 @@ const ArtDetail = ({ art, openModal, closeModal, showModal }) => {
         <img
           src={art.primaryimageurl}
           alt={art.title || "Artwork image"}
-          onClick={openModal}
+          onClick={toggleModal}
           className="w-full h-auto rounded-lg mb-6 object-contain cursor-pointer"
         />
       )}
-      <ImageModal show={showModal} onClose={closeModal}>
+      <ImageModal show={showModal} toggleModal={toggleModal}>
         <img
           src={art.primaryimageurl}
           alt={art.title || "Artwork image"}
