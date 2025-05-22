@@ -1,14 +1,13 @@
 import apiClient from "../api/apiClient";
 
-export const fetchHarvardArtworks = async (page = 1, size = 30) => {
+export const fetchHarvardArtworks = async (size = 15, page = 1) => {
   try {
     const response = await apiClient.get("/object", {
       params: {
         apikey: import.meta.env.VITE_API_KEY,
-        page,
         size,
+        page,
         hasimage: 1,
-        sort: "random",
       },
     });
     return response.data;

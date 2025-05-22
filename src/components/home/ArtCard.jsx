@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const ArtCard = ({ art, onImageLoad, isReady }) => {
-  console.log(art);
   return (
     <Link to={`/arts/${art.id}`}>
       <div className="relative group w-full rounded-2xl overflow-hidden cursor-pointer">
