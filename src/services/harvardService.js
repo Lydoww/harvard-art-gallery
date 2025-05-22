@@ -8,6 +8,7 @@ export const fetchHarvardArtworks = async (size = 15, page = 1) => {
         size,
         page,
         hasimage: 1,
+        sort: "random",
       },
     });
     return response.data;

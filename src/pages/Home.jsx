@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchHarvardArtworks } from "../services/harvardService";
 import ArtList from "../components/home/ArtList";
 import SkeletonItem from "../components/ui/SkeletonItem";
@@ -6,66 +6,34 @@ import SkeletonItem from "../components/ui/SkeletonItem";
 const Home = () => {
   const [arts, setArts] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const [page, setPage] = useState(1); // Nouvel état pour la pagination
-  const initialized = useRef(false); // Pour éviter le double appel initial
+
+  const size = 15;
 
   const totalImages = arts.length;
   const allImagesLoaded = imagesLoaded === totalImages && !loadingData;
   const isReady = !loadingData && imagesLoaded === totalImages;
 
-  const size = 15;
-  const maxPages = 3; // Limite de pages à charger
-
   const handleImageLoad = () => {
     setImagesLoaded((prev) => prev + 1);
   };
 
-  const loadArtworks = async (isInitial = false) => {
-    if (isInitial) setLoadingData(true);
-    else setLoadingMore(true);
+  const loadArtworks = async () => {
+    setLoadingData(true);
 
     try {
-      const result = await fetchHarvardArtworks(size, page); // On passe la page
+      const result = await fetchHarvardArtworks(size, 1); // page 1 uniquement
       const filtered = result.records.filter((art) => art.primaryimageurl);
-
-      setArts((prev) => {
-        // Évite les doublons avec un Set
-        const existingIds = new Set(prev.map((art) => art.id));
-        const newArts = filtered.filter((art) => !existingIds.has(art.id));
-        return [...prev, ...newArts];
-      });
-
-      setImagesLoaded(0);
-      if (!isInitial) setPage((prev) => prev + 1);
+      setArts(filtered);
     } finally {
-      if (isInitial) setLoadingData(false);
-      else setLoadingMore(false);
+      setLoadingData(false);
+      setImagesLoaded(0); // Réinitialise pour le suivi du chargement
     }
   };
 
-  // Premier chargement
   useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      loadArtworks(true);
-    }
+    loadArtworks();
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const nearBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 500;
-
-      if (nearBottom && !loadingMore && page <= maxPages) {
-        loadArtworks(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [loadingMore, page]);
 
   return (
     <div>
@@ -86,12 +54,6 @@ const Home = () => {
       <div className={allImagesLoaded ? "block" : "hidden"}>
         <ArtList arts={arts} onImageLoad={handleImageLoad} isReady={isReady} />
       </div>
-
-      {loadingMore && (
-        <div className="flex justify-center mt-4 text-purple-600">
-          Loading more artworks...
-        </div>
-      )}
     </div>
   );
 };
