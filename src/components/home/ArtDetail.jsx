@@ -57,6 +57,14 @@ const ArtDetail = ({ art, toggleModal, showModal }) => {
         </p>
       )}
 
+      {/* Type */}
+      {art.worktypes?.[0]?.worktype && (
+        <p className="text-md mb-2">
+          <span className="font-semibold ">Type:</span>{" "}
+          {art.worktypes?.[0]?.worktype || "Unknown"}
+        </p>
+      )}
+
       {/* Technique */}
       {art.technique && (
         <p className="text-md mb-2">
@@ -84,16 +92,18 @@ const ArtDetail = ({ art, toggleModal, showModal }) => {
       )}
 
       {/* Lien vers la page officielle */}
-      {art.url && (
-        <a
-          href={art.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-        >
-          View on Harvard Art Museums
-        </a>
-      )}
+      <div className="flex justify-center">
+        {art.url && (
+          <a
+            href={art.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className=" w-auto mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
+          >
+            View on Harvard Art Museums
+          </a>
+        )}
+      </div>
     </div>
   );
 };

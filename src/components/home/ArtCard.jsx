@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ArtCard = ({ art }) => {
+const ArtCard = ({ art, onImageLoad, isReady }) => {
   console.log(art);
   return (
     <Link to={`/arts/${art.id}`}>
@@ -9,7 +9,8 @@ const ArtCard = ({ art }) => {
         <img
           src={art.primaryimageurl}
           alt={`Image of ${art.title}`}
-          className=" w-full h-52 object-cover rounded-2xl transition-filter duration-300 delay-100 group-hover:blur-sm"
+          onLoad={onImageLoad}
+          className={`w-full h-52 object-cover rounded-2xl transition-filter duration-300 delay-100 group-hover:blur-sm ${isReady ? "opacity-100" : "opacity-0"}`}
         />
 
         {/* Overlay texte visible au hover */}
@@ -37,16 +38,11 @@ const ArtCard = ({ art }) => {
           </p>
 
           <p className="text-sm mb-1 break-words">
-            <span className="font-semibold text-blue-400">Type:</span>{" "}
-            {art.worktypes?.[0]?.worktype || "Unknown"}
-          </p>
-
-          <p className="text-sm mb-1 break-words">
             <span className="font-semibold text-blue-400">Culture:</span>{" "}
             {art.culture || "Unknown"}
           </p>
 
-          <p className="text-sm break-words absolute bottom-3 right-4">
+          <p className="text-sm break-words">
             <span className="font-semibold text-blue-400">Date:</span>{" "}
             {art.dated || "Unknown"}
           </p>
