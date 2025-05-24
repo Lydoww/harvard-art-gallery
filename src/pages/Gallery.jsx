@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchGalleries } from "../services/harvardService";
+import GalleryList from "../components/gallery/GalleryList";
 
 const Gallery = () => {
   const [galleryArt, setGalleryArt] = useState([]);
@@ -22,16 +23,11 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="flex justify-center mb-4 text-2xl font-semibold">Brower through various gallery, click to learn more about it.</h1>
-      <ul className="grid grid-rows-3 grid-cols-3 gap-6 w-auto">
-        {galleryArt.map((gallery) => (
-          <li key={gallery.galleryid}>
-            <h2>{gallery.name}</h2>
-            <p>Donor: {gallery.donorname || "unknown"}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col items-center space-y-6">
+      <h1 className="text-2xl font-semibold text-center">
+        Current gallery exposition at the Harvard museum
+      </h1>
+      <GalleryList galleryArt={galleryArt} />
     </div>
   );
 };

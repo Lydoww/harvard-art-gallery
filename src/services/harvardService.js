@@ -37,6 +37,8 @@ export const fetchGalleries = async () => {
     const response = await apiClient.get(`/gallery`, {
       params: {
         apikey: import.meta.env.VITE_API_KEY,
+        size: 100,
+        sortorder: "asc",
       },
     });
     return response.data;
