@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchHarvardArtworks } from "../services/harvardService";
+import { fetchHarvardArtworks } from "../services/harvardArtwork";
 import ArtList from "../components/home/ArtList";
 import SkeletonItem from "../components/ui/SkeletonItem";
 

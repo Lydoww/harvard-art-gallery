@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArtItemById } from "../services/harvardService";
+import { fetchArtItemById } from "../services/harvardArtwork";
 import ArtDetail from "../components/home/ArtDetail";
 
 const ArtDetailPage = () => {

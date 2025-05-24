@@ -4,7 +4,7 @@ const GalleryCard = ({ gallery }) => {
   return (
     <>
       <div className="w-full rounded-2xl overflow-hidden bg-white shadow-md p-4">
-        <h2 className="font-semibold">{gallery.name}</h2>
+        <h2 className="font-semibold text-lg">{gallery.name}</h2>
         <p className="text-sm text-gray-600">
           Artworks: {gallery.objectcount || "Unknown"}
         </p>

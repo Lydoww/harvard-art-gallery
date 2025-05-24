@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchGalleries } from "../services/harvardService";
+import { fetchGalleries } from "../services/harvardGallery";
 import GalleryList from "../components/gallery/GalleryList";
 
 const Gallery = () => {
